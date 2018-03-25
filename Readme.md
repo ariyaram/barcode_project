@@ -13,8 +13,14 @@ Project Setup:
 
 
 Sample_File:
- barcode_length, no_of_barcodes,Min GC %,Max GC %,Min TM %,Max TM%, Similarity,Complementarity,parsec species type,userName
- 27,200,,,,,,,Homo_sapiens,Sandeep
+
+barcode_length, no_of_barcodes,Min GC %,Max GC %,Min TM %,Max TM%, Similarity,Complementarity,parsec species type,userName
+27,200,,,,,,,Homo_sapiens,Sandeep
+
+Output Dir:
+	<user.home>/Generated_Barcodes/
+	Ex: Windows: C:\Users\Sandeep\Generated_Barcodes
+	    Linux:  /home/Sandeep/Generated_Barcodes
  
 Parsec_Species_Types:
 	Danio_rerio
