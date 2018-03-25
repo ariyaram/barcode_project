@@ -23,12 +23,12 @@ Output Dir:
 	    Linux:  /home/Sandeep/Generated_Barcodes
  
 Parsec_Species_Types:
-	Danio_rerio
-	Rattus_norvegicus
-	Homo_sapiens
-	Gallus_gallus
-	Mus_musculus
-	Drosophila_melanogaster
-	Saccharomyces_cerevisiae
-	Caenorhabditis_elegans
+	 Danio_rerio
+	 Rattus_norvegicus
+	 Homo_sapiens
+	 Gallus_gallus
+	 Mus_musculus
+	 Drosophila_melanogaster
+	 Saccharomyces_cerevisiae
+	 Caenorhabditis_elegans
 	
