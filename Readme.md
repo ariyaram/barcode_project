@@ -19,7 +19,7 @@ barcode_length, no_of_barcodes,Min GC %,Max GC %,Min TM %,Max TM%, Similarity,Co
 
 <b>Output Dir:</b>
 	<user.home>/Generated_Barcodes/ <br/>
-	{color:red}Ex:{color}</font> Windows: C:\Users\Sandeep\Generated_Barcodes <br/>
+	Ex: Windows: C:\Users\Sandeep\Generated_Barcodes <br/>
 	    Linux:  /home/Sandeep/Generated_Barcodes
  
 <b>Parsec_Species_Types:</b><br/>
