@@ -12,14 +12,14 @@
   	ex: java -cp target/barcode-1.0-SNAPSHOT-jar-with-dependencies.jar com.sandeep.app.barcode.BarCodeApplication C:\Users\ramarao.ariyaram\Desktop\Barcode_Input.csv
 
 
-<b>Sample_File:</b>
+<b>Sample_File:</b><font color="red"> (Barcode_Input.csv)</font><br/>
 
-barcode_length, no_of_barcodes,Min GC %,Max GC %,Min TM %,Max TM%, Similarity,Complementarity,parsec species type,userName
+barcode_length, no_of_barcodes,Min GC %,Max GC %,Min TM %,Max TM%, Similarity,Complementarity,parsec species type,userName<br/>
 27,200,,,,,,,Homo_sapiens,Sandeep
 
 <b>Output Dir:</b>
 	<user.home>/Generated_Barcodes/ <br/>
-	Ex: Windows: C:\Users\Sandeep\Generated_Barcodes <br/>
+	<font color="red">Ex:</font> Windows: C:\Users\Sandeep\Generated_Barcodes <br/>
 	    Linux:  /home/Sandeep/Generated_Barcodes
  
 <b>Parsec_Species_Types:</b><br/>
