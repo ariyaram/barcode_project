@@ -18,17 +18,17 @@ barcode_length, no_of_barcodes,Min GC %,Max GC %,Min TM %,Max TM%, Similarity,Co
 27,200,,,,,,,Homo_sapiens,Sandeep
 
 Output Dir:
-	<user.home>/Generated_Barcodes/
-	Ex: Windows: C:\Users\Sandeep\Generated_Barcodes
+	<user.home>/Generated_Barcodes/ <br/>
+	Ex: Windows: C:\Users\Sandeep\Generated_Barcodes <br/>
 	    Linux:  /home/Sandeep/Generated_Barcodes
  
-Parsec_Species_Types:
-	  Danio_rerio
-	  Rattus_norvegicus
-	  Homo_sapiens
-	  Gallus_gallus
-	  Mus_musculus
-	  Drosophila_melanogaster
-	  Saccharomyces_cerevisiae
+Parsec_Species_Types:<br/>
+	  Danio_rerio<br/>
+	  Rattus_norvegicus<br/>
+	  Homo_sapiens<br/>
+	  Gallus_gallus<br/>
+	  Mus_musculus<br/>
+	  Drosophila_melanogaster<br/>
+	  Saccharomyces_cerevisiae<br/>
 	  Caenorhabditis_elegans
 	
