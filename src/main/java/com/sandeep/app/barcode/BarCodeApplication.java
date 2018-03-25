@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.json.JSONException;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.sandeep.app.barcode.utils.FileUtil;
 import com.sandeep.app.barcode.utils.ParsecUtl;
 import com.sandeep.app.barcode.utils.RandomUtil;
@@ -36,7 +38,7 @@ public class BarCodeApplication {
         BarcodeRequest request = null;
         if(args != null && args.length >0) {
             request = FileUtil.convertFile(args[0]);
-            project.process(request);
+           
         }else {
             request = new BarcodeRequest();
             request.setNoOfBarcodes(project.noOfCodesGenerated);
@@ -50,11 +52,10 @@ public class BarCodeApplication {
             request.setUserName("System");
             request.setParsecKey("Homo_sapiens");
             request.setParsecValue("hg19_9606_Homo_sapiens_masked");
-            project.process(request);
         }
         
        
-        
+        project.process(request);
         
        
         if(project.parsecRejectedSet != null && !project.parsecRejectedSet.isEmpty()) {
@@ -63,6 +64,9 @@ public class BarCodeApplication {
         
         if(project.finalSet != null && !project.finalSet.isEmpty()) {
             
+            if(project.finalSet.size() > request.getNoOfBarcodes()) {
+                project.finalSet = ImmutableSet.copyOf(Iterables.limit(project.finalSet, request.getNoOfBarcodes()));
+            }
             long endTime =((System.currentTimeMillis()-start));
             request.setTotalProcessingTime(endTime);
             
@@ -93,7 +97,9 @@ public class BarCodeApplication {
 
         }
         long start = System.currentTimeMillis();
+        
         finalSet.addAll(ParsecUtl.prepareAndSend(request.getParsecValue(), returnSet));
+        
         long endTime =((System.currentTimeMillis()-start));
         request.setTotalParsecTime(request.getTotalParsecTime()+endTime);
         returnSet.removeAll(finalSet);

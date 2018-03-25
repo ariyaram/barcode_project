@@ -140,14 +140,19 @@ public class FileUtil {
             opDir.mkdir();
         }
         DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
-        String fileName = request.getUserName() + "_" + fileNameStartWith + "_" + request.getBarcodeLength()
-                + "-Length_" + df.format(Calendar.getInstance().getTime()) + ".csv";
+        String fileName = request.getUserName() + 
+                "_" + fileNameStartWith + 
+                "_" + request.getBarcodeLength()+ 
+                "-Length_" + 
+                "_" + request.getParsecKey()+ 
+                "_"+df.format(Calendar.getInstance().getTime()) + ".csv";
         writeIntoOutputFile(resultSet, opDir, fileName,request);
     }
 
     private static void writeIntoOutputFile(Set<String> returnSet, File outputDir, String fileName,BarcodeRequest request) throws IOException {
 
         String barcode;
+        String complBarcode;
         if (returnSet != null && !returnSet.isEmpty()) {
 
             
@@ -157,11 +162,13 @@ public class FileUtil {
                 writeInputIntoOutPut(request,br);
                 Iterator<String> barCodeIte = returnSet.iterator();
                 br.write("FileOutput\n");
-                br.write("BarCode,Rev Compl,GC Count,Melting Temp,Melting Temp2\n");
+                br.write("BarCode,Complementary,Rev Complementary,GC Count,Melting Temp,Melting Temp2\n");
                 while (barCodeIte.hasNext()) {
                     barcode = barCodeIte.next();
+                    complBarcode= generateCompleemntarityCode(barcode);
                     br.write(barcode +separator
-                            +generateCompleemntarityCode(barcode)+separator
+                            +complBarcode+separator
+                            +new StringBuilder(complBarcode).reverse().toString()+separator
                             +BarCodeValidator.getGCCount(barcode)+separator
                             +BarCodeValidator.calculateMeltingTemperature(barcode)+separator
                             +roundingDouble(BarCodeValidator.calculateMeltingTemperature2(barcode,request.getBarcodeLength()),2)
