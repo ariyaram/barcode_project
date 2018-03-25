@@ -8,7 +8,7 @@
   1. Clone project https://github.com/ariyaram/barcode_project.git
   2. got to barcode_project folder
   3. run mvn package
-  4. execute java -cp <jar_path>/<jar_name>.jar <className> <file_path>
+  4. execute:: java -cp <jar_path>/<jar_name>.jar <className> <file_path>
   	ex: java -cp target/barcode-1.0-SNAPSHOT-jar-with-dependencies.jar com.sandeep.app.barcode.BarCodeApplication C:\Users\ramarao.ariyaram\Desktop\Barcode_Input.csv
 
 
