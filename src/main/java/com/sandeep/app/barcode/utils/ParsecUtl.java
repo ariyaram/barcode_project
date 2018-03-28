@@ -20,20 +20,15 @@ public class ParsecUtl {
 	
 	public static Set<String> prepareAndSend(String genomeType, Set<String> inputSet)
 			throws JSONException, IOException {
-		Set<String> newSet = new HashSet<String>();
 		StringBuilder parsecCode = new StringBuilder();
 		
 		inputSet.stream().forEach(s -> parsecCode.append(",\""+s+"\""));
 
-		List<String> returnList = isMatchWithGenome(parsecCode.toString().substring(1), genomeType);
-		parsecCode.setLength(0);
-		// parsecPassedSet.addAll(returnList);
-		newSet.addAll(returnList);
+		return isMatchWithGenome(parsecCode.toString().substring(1), genomeType);
 
-		return newSet;
 	}
 
-	private static List<String> isMatchWithGenome(String barcode,
+	private static Set<String> isMatchWithGenome(String barcode,
 			String genomeType) throws JSONException, IOException {
 		String output = "";
 		String data = "type=POST&action=SequenceFilterAPI&input={\"genome\":\""+ genomeType + "\",\"sequences\":[" + barcode+ "]}&dataType=json";
@@ -68,8 +63,8 @@ public class ParsecUtl {
 		// return false;
 	}
 
-	private static List<String> convertToList(String successCodes) {
-		List<String> list = new ArrayList<String>();
+	private static Set<String> convertToList(String successCodes) {
+	    Set<String> list = new HashSet<String>();
 		if (successCodes != null && successCodes.length() > 2) {
 			successCodes = successCodes.substring(1, successCodes.length() - 1);
 			successCodes = successCodes.replaceAll("\"", EMPTY);

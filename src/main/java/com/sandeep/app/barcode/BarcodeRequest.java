@@ -3,6 +3,7 @@ package com.sandeep.app.barcode;
 public class BarcodeRequest {
 
     private int noOfBarcodes = 10000;
+    private int requestedBarCodes = 10000;
     private int barcodeLength = 27;
 
     private int minTemp = 40;
@@ -125,6 +126,14 @@ public class BarcodeRequest {
 
     public void setParsecValue(String parsecValue) {
         this.parsecValue = parsecValue;
+    }
+
+    public int getRequestedBarCodes() {
+        return requestedBarCodes;
+    }
+
+    public void setRequestedBarCodes(int requestedBarCodes) {
+        this.requestedBarCodes = requestedBarCodes;
     }
     
     

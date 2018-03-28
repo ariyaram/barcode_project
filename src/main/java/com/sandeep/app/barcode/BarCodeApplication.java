@@ -42,6 +42,7 @@ public class BarCodeApplication {
         }else {
             request = new BarcodeRequest();
             request.setNoOfBarcodes(project.noOfCodesGenerated);
+            request.setRequestedBarCodes(project.noOfCodesGenerated);
             request.setBarcodeLength(project.barcodeLength);
             request.setMinGC(project.minGC);
             request.setMaxGC(project.maxGC);
@@ -55,7 +56,7 @@ public class BarCodeApplication {
         }
         
        
-        project.process(request);
+        project.startProcess(request);
         
        
         if(project.parsecRejectedSet != null && !project.parsecRejectedSet.isEmpty()) {
@@ -64,8 +65,8 @@ public class BarCodeApplication {
         
         if(project.finalSet != null && !project.finalSet.isEmpty()) {
             
-            if(project.finalSet.size() > request.getNoOfBarcodes()) {
-                project.finalSet = ImmutableSet.copyOf(Iterables.limit(project.finalSet, request.getNoOfBarcodes()));
+            if(project.finalSet.size() > request.getRequestedBarCodes()) {
+                project.finalSet = ImmutableSet.copyOf(Iterables.limit(project.finalSet, request.getRequestedBarCodes()));
             }
             long endTime =((System.currentTimeMillis()-start));
             request.setTotalProcessingTime(endTime);
@@ -75,6 +76,19 @@ public class BarCodeApplication {
        
     }
 
+    private void startProcess(BarcodeRequest request) throws JSONException, IOException {
+        int generatedSize = 0;
+        
+        do {
+            process(request);
+            generatedSize = finalSet.size();
+            if(generatedSize >= request.getRequestedBarCodes()) {
+                break;
+            }
+            request.setNoOfBarcodes(request.getRequestedBarCodes()-generatedSize);
+        }while(generatedSize >= request.getRequestedBarCodes());
+       
+    }
     private void process(BarcodeRequest request) throws JSONException, IOException {
 
       
@@ -83,23 +97,22 @@ public class BarCodeApplication {
 
         String generated_barcode;
         Set<String> returnSet = new HashSet<String>();
-
         BarCodeValidator validator = new BarCodeValidator(request);
-
+        Set<String> completeSet = new HashSet<>();
+        completeSet.addAll(finalSet);
         while (bagCount < noOfCodes) {
             generated_barcode = RandomUtil.random(barcodeLength);
             
-            if (validator.validate(generated_barcode,returnSet)) {
-                System.out.println(generated_barcode);
+            if (validator.validate(generated_barcode,completeSet)) {
+                System.out.println(generated_barcode+" "+bagCount);
                 bagCount++;
                 returnSet.add(generated_barcode);
+                completeSet.add(generated_barcode);
             }
 
         }
         long start = System.currentTimeMillis();
-        
         finalSet.addAll(ParsecUtl.prepareAndSend(request.getParsecValue(), returnSet));
-        
         long endTime =((System.currentTimeMillis()-start));
         request.setTotalParsecTime(request.getTotalParsecTime()+endTime);
         returnSet.removeAll(finalSet);

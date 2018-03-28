@@ -93,6 +93,7 @@ public class FileUtil {
         }
 
         request.setNoOfBarcodes(Integer.parseInt(inputDataArr[1]));
+        request.setRequestedBarCodes(Integer.parseInt(inputDataArr[1]));
         request.setBarcodeLength(Integer.parseInt(inputDataArr[0]));
         request.setParsecValue(parsec_species.get(inputDataArr[8]));
         request.setParsecKey(inputDataArr[8]);
@@ -185,7 +186,7 @@ public class FileUtil {
         br.write("Barcode_length, No_of_barcodes,Min GC %,Max GC %,Min TM %,Max TM%, Similarity,Complementarity,parsec species type,userName\n");
        
         br.write(request.getBarcodeLength()+separator);
-        br.write(request.getNoOfBarcodes()+separator);
+        br.write(request.getRequestedBarCodes()+separator);
         br.write(request.getMinGC()+separator);
         br.write(request.getMaxGC()+separator);
         br.write(request.getMinTemp()+separator);
