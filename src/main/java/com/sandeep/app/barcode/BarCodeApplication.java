@@ -78,6 +78,7 @@ public class BarCodeApplication {
 
     private void startProcess(BarcodeRequest request) throws JSONException, IOException {
         int generatedSize = 0;
+        
         do {
             process(request);
             generatedSize = finalSet.size();
@@ -96,21 +97,21 @@ public class BarCodeApplication {
 
         String generated_barcode;
         Set<String> returnSet = new HashSet<String>();
-
         BarCodeValidator validator = new BarCodeValidator(request);
-
+        Set<String> completeSet = new HashSet<>();
+        completeSet.addAll(finalSet);
         while (bagCount < noOfCodes) {
             generated_barcode = RandomUtil.random(barcodeLength);
             
-            if (validator.validate(generated_barcode,finalSet)) {
+            if (validator.validate(generated_barcode,completeSet)) {
                 System.out.println(generated_barcode+" "+bagCount);
                 bagCount++;
                 returnSet.add(generated_barcode);
+                completeSet.add(generated_barcode);
             }
 
         }
         long start = System.currentTimeMillis();
-        
         finalSet.addAll(ParsecUtl.prepareAndSend(request.getParsecValue(), returnSet));
         long endTime =((System.currentTimeMillis()-start));
         request.setTotalParsecTime(request.getTotalParsecTime()+endTime);
